@@ -70,6 +70,7 @@ typedef struct _LDR_DATA_TABLE_ENTRY
 	ULONG TimeDateStamp;
 } LDR_DATA_TABLE_ENTRY, *PLDR_DATA_TABLE_ENTRY;
 
+typedef struct _PEB_LDR_DATA
 {
    DWORD dwLength;
    DWORD dwInitialized;
@@ -80,11 +81,13 @@ typedef struct _LDR_DATA_TABLE_ENTRY
    LPVOID lpEntryInProgress;
 } PEB_LDR_DATA, * PPEB_LDR_DATA;
 
+typedef struct _PEB_FREE_BLOCK
 {
    struct _PEB_FREE_BLOCK * pNext;
    DWORD dwSize;
 } PEB_FREE_BLOCK, * PPEB_FREE_BLOCK;
 
+typedef struct __PEB
 {
    BYTE bInheritedAddressSpace;
    BYTE bReadImageFileExecOptions;

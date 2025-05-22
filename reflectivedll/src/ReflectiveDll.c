@@ -1,13 +1,9 @@
-/*
-author: l0c0b0b0
-*/
 #include "ReflectiveLoader.h"
 #include <windows.h>
 #include <wincrypt.h>
 #pragma comment (lib, "crypt32.lib")
 #pragma comment (lib, "advapi32")
 #include <psapi.h>
-
 
 extern HINSTANCE hAppInstance;
 int AESDecrypt(char* payload, unsigned int payload_len, char* key, size_t keylen) {

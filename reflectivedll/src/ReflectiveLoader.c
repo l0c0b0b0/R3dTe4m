@@ -2,9 +2,6 @@
 HINSTANCE hAppInstance = NULL;
 #pragma intrinsic( _ReturnAddress )
 __declspec(noinline) ULONG_PTR caller( VOID ) { return (ULONG_PTR)_ReturnAddress(); }
-
-
-
 #ifdef REFLECTIVEDLLINJECTION_VIA_LOADREMOTELIBRARYR
 DLLEXPORT ULONG_PTR WINAPI ReflectiveLoader( LPVOID lpParameter )
 #else
@@ -179,7 +176,6 @@ DLLEXPORT ULONG_PTR WINAPI ReflectiveLoader( VOID )
 	while( uiValueA-- )
 		*(BYTE *)uiValueC++ = *(BYTE *)uiValueB++;
 
-
 	uiValueA = ( (ULONG_PTR)&((PIMAGE_NT_HEADERS)uiHeaderValue)->OptionalHeader + ((PIMAGE_NT_HEADERS)uiHeaderValue)->FileHeader.SizeOfOptionalHeader );
 	
 	uiValueE = ((PIMAGE_NT_HEADERS)uiHeaderValue)->FileHeader.NumberOfSections;
@@ -240,7 +236,6 @@ DLLEXPORT ULONG_PTR WINAPI ReflectiveLoader( VOID )
 		uiValueC += sizeof( IMAGE_IMPORT_DESCRIPTOR );
 	}
 
-
 	uiLibraryAddress = uiBaseAddress - ((PIMAGE_NT_HEADERS)uiHeaderValue)->OptionalHeader.ImageBase;
 
 	uiValueB = (ULONG_PTR)&((PIMAGE_NT_HEADERS)uiHeaderValue)->OptionalHeader.DataDirectory[ IMAGE_DIRECTORY_ENTRY_BASERELOC ];
@@ -298,7 +293,6 @@ DLLEXPORT ULONG_PTR WINAPI ReflectiveLoader( VOID )
 			uiValueC = uiValueC + ((PIMAGE_BASE_RELOCATION)uiValueC)->SizeOfBlock;
 		}
 	}
-
 
 	uiValueA = ( uiBaseAddress + ((PIMAGE_NT_HEADERS)uiHeaderValue)->OptionalHeader.AddressOfEntryPoint );
 

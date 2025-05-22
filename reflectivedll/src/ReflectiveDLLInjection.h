@@ -3,7 +3,6 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-
 #define DLL_QUERY_HMODULE		6
 
 #define DEREF( name )*(UINT_PTR *)(name)
