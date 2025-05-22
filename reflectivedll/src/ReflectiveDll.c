@@ -1,3 +1,6 @@
+/*
+author: l0c0b0b0
+*/
 #include "ReflectiveLoader.h"
 #include <windows.h>
 #include <wincrypt.h>
