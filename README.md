@@ -19,9 +19,9 @@ Several functions and API may need to be installed default deppendencies of Wind
 aes.py requires the usage of Python3.8+ and pip, which can be installed on any Linux using the following commands:
 
 ```bash
-python3 -m pip install Crypto --break-systempackages
-python3 -m pip install pycryto --break-systempackages
-python3 -m pip install pycryptomode --break-systempackages
+python3 -m pip install Crypto --break-system-packages
+python3 -m pip install pycryto --break-system-packages
+python3 -m pip install pycryptomode --break-system-packages
 ```
 
 
