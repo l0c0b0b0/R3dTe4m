@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{3fd15040-408a-41d1-b102-842bf6652a47}</ProjectGuid>
-    <RootNamespace>reflectiveLoader</RootNamespace>
+    <RootNamespace>bOlO</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
