@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="reflective_dll"
+	Name="cObO"
 	ProjectGUID="{3A371EBD-EEE1-4B2A-88B9-93E7BABE0949}"
-	RootNamespace="reflective_dll"
+	RootNamespace="cObO"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -235,7 +235,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
-				CommandLine="copy ..\Release\reflective_dll.dll ..\bin\"
+				CommandLine="copy ..\Release\cObO.dll ..\bin\"
 			/>
 		</Configuration>
 		<Configuration
