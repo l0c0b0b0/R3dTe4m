@@ -24,11 +24,6 @@ python3 -m pip install pycryto --break-system-packages
 python3 -m pip install pycryptomode --break-system-packages
 ```
 
-
-### Supporting Packages
-
-Several commands used in AutoRecon may need to be installed, deppending on your OS:
-
 ## Usage
 
 [1] Create payload reverse shell (binary/raw) file:
@@ -106,7 +101,3 @@ By default, results will be stored in the ./recon directory. A new sub directory
 └── src
     └── main.cpp
 ./tools
-├── aes.py
-└── ex.ps1
-
-```
