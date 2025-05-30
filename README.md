@@ -83,21 +83,37 @@ By default, results will be stored in the ./recon directory. A new sub directory
 ```
 .
 ./reflectivedll
-├── reflective_dll.sln
-├── reflective_dll.vcproj
-├── reflective_dll.vcxproj
-├── reflective_dll.vcxproj.filters
-├── reflective_dll.vcxproj.user
+├── cObO.sln
+├── cObO.vcproj
+├── cObO.vcxproj
+├── cObO.vcxproj.filters
+├── cObO.vcxproj.user
 └── src
     ├── ReflectiveDll.c
     ├── ReflectiveDLLInjection.h
     ├── ReflectiveLoader.c
     └── ReflectiveLoader.h
 ./reflectiveloader
-├── reflectiveLoader.sln
-├── reflectiveLoader.vcxproj
-├── reflectiveLoader.vcxproj.filters
-├── reflectiveLoader.vcxproj.user
+├── bOlO.sln
+├── bOlO.vcxproj
+├── bOlO.vcxproj.filters
+├── bOlO.vcxproj.user
 └── src
     └── main.cpp
 ./tools
+├── cipherpayload
+│   └── aes.py
+├── htmlsmuggling
+│   ├── smuggling.py
+│   ├── source.c
+│   └── template.html
+├── iexpress
+│   ├── readme.txt
+│   └── winrar.SED
+├── leaklink
+│   ├── leaklink.py
+│   └── readme.txt
+└── triggers
+    ├── ex.ps1
+    ├── oneline.txt
+    └── readme.txt
