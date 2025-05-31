@@ -99,16 +99,16 @@ When the archive is executed, it first extracts the files and then runs them as 
 **NOTE**
 **TODO: Evasion EDR/AV with Windows SandBox, mount Disk "C:" into Virtual Windows Machine and copy you evil payload (reflective.exe) to C:\Windows\System32\DIAMOND.EXE. Execute IExpress with "QUANTUM" compression and can have administrative privileges.(Ref: https://www.youtube.com/watch?v=O20WhmCspqo)**
 
-[....]
-[IExPress]
 In .SED file add:
+```
+[Options]
 PackagePurpose=CreateCAB
-[....]
+...
 ExtractorStub=
 CompressionType=QUANTUM
 [Strings]
-[....]
-
+...
+```
 ---
 ...in that way, IExpress is able to create a package that can be exploited on some far-away computer, but it does not constitute a vulnerability on the computer being scanned because it itself does not extract the package. A design flaw, definitely, but not actually something that makes the computer vulnerable.
 
