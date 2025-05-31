@@ -235,7 +235,7 @@ options:
 By default, results will be stored in the ./recon directory. A new sub directory is created for every target. The structure of this sub directory is:
 
 ```
-.
+/README.md
 ./reflectivedll
 ├── cObO.sln
 ├── cObO.vcproj
@@ -258,16 +258,23 @@ By default, results will be stored in the ./recon directory. A new sub directory
 ├── cipherpayload
 │   └── aes.py
 ├── htmlsmuggling
+│   ├── page.html
+│   ├── payload_b64
+│   ├── PDFReader.EXE
+│   ├── PDFReader_First.EXE
 │   ├── smuggling.py
 │   ├── source.c
 │   └── template.html
 ├── iexpress
-│   ├── readme.txt
-│   └── winrar.SED
+│   ├── PDFReader.SED
+│   └── readme.txt
 ├── leaklink
+│   ├── evillink.lnk
 │   ├── leaklink.py
+│   ├── poc.lnk
 │   └── readme.txt
 └── triggers
     ├── ex.ps1
     ├── oneline.txt
     └── readme.txt
+```
