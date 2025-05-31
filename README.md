@@ -156,7 +156,7 @@ HTML smuggling works by encoding the file in the HTML content itself and using J
 > - output => add output name file in .html
 
 ```bash
-python3 smuggling.py
+~$ python3 smuggling.py
 Exe file name (Default => GetAdobeReader): PDFReader
 Phishing URL (Default => https://get.adobe.com/flashplayer/):
 Building malware binary
