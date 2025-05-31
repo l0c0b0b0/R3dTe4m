@@ -91,29 +91,27 @@ When the archive is executed, it first extracts the files and then runs them as 
 > - If a malicious .dll resides in the same directory as a self-extracting archive created by IExpress, and shares a filename with one of the archived files, but not its path, that malicious .dll may be executed by the archive upon extraction.
 > - Injection of completes powershell commands.
 > - IExpress uses makecab in order to create the cab/exe files. But internally at Microsoft there is a tool called DIAMOND.EXE that act similarly to makecab (btw the DDF files that we are passing to makecab are called like that because of this. Short for DIAMOND Directive File).
-
 > - Specify a special compression type called "QUANTUM" inside the .SED file that we pass to IExpress we can make it invoke DIAMOND.EXE (which does NOT exists on modern Windows Machine) instead they use makecab.exe.
-
 
 **NOTE**
 
-TODO: Evasion EDR/AV with Windows SandBox, mount Disk "C:" into Virtual Windows Machine and copy you evil payload (reflective.exe) to C:\Windows\System32\DIAMOND.EXE. Execute IExpress with "QUANTUM" compression and can have administrative privileges.(Ref: https://www.youtube.com/watch?v=O20WhmCspqo)
-
-In .SED file add:
-
-```xml
-[Options]
-PackagePurpose=CreateCAB
-
-...
-
-ExtractorStub=
-CompressionType=QUANTUM
-[Strings]
-
-...
-
-```
+>TODO: Evasion EDR/AV with Windows SandBox, mount Disk "C:" into Virtual Windows Machine and copy you evil payload (reflective.exe) to C:\Windows\System32\DIAMOND.EXE. Execute IExpress with "QUANTUM" compression and can have administrative privileges.(Ref: https://www.youtube.com/watch?v=O20WhmCspqo)
+>
+>In .SED file add:
+>
+>```xml
+>[Options]
+>PackagePurpose=CreateCAB
+>
+>...
+>
+>ExtractorStub=
+>CompressionType=QUANTUM
+>[Strings]
+>
+>...
+>
+>```
 
 
 ...in that way, IExpress is able to create a package that can be exploited on some far-away computer, but it does not constitute a vulnerability on the computer being scanned because it itself does not extract the package. A design flaw, definitely, but not actually something that makes the computer vulnerable.
