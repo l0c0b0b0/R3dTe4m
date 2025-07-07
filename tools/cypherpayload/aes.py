@@ -3,7 +3,7 @@
 # author: l0c0b0b0
 # python3 -m pip install Crypto --break-systempackages
 # python3 -m pip install pycryto --break-systempackages
-# python3 -m pip install pycryptomode --break-systempackages
+# python3 -m pip install pycryptodome --break-systempackages
 
 import sys
 from base64 import b64encode

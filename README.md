@@ -21,7 +21,7 @@ aes.py requires the usage of Python3.8+ and pip, which can be installed on any L
 ```bash
 python3 -m pip install Crypto --break-system-packages
 python3 -m pip install pycryto --break-system-packages
-python3 -m pip install pycryptomode --break-system-packages
+python3 -m pip install pycryptodome --break-system-packages
 ```
 
 ## Usage
