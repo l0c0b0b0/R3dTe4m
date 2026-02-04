@@ -1,7 +1,7 @@
 # Compile in GO:
 ## reev.go
 
-Change the IP address and PORT on line: 19
+Change the IP address and PORT on line: 18
 
 ```bash
 ~$ GOOS=windows GOARCH=amd64 go build -o reev.exe reev.go
