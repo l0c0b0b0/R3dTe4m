@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"log"
 	"net"
 	"os"
 	"os/exec"
@@ -60,7 +59,7 @@ func cleanup() {
 		connMutex.RLock()
 		if conn != nil {
 			conn.Close()
-			log.Println("Connection closed")
+			// log.Println("Connection closed")
 		}
 		connMutex.RUnlock()
 		
